@@ -1,0 +1,24 @@
+ sudo: false
+language: cpp
+compiler:
+- gcc
+
+os:
+- linux
+
+addons:
+apt:
+sources:
+- ubuntu-toolchain-r-test
+packages:
+- gcc-4.8
+- g++-4.8
+- clang
+
+script:
+- cd test
+- g++ exo.cpp -o server
+- gcc main.c -o main client.h client.c
+- cmake CMakeLists.txt && make
+- ./server &
+- ./my_test
